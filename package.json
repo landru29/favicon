@@ -1,0 +1,19 @@
+{
+  "name": "favicon",
+  "version": "1.0.0",
+  "description": "Dynamic favicon to display progress",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/landru29/favicon.git"
+  },
+  "author": "cyrille.meichel <cmeichel@free.fr>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/landru29/favicon/issues"
+  },
+  "homepage": "https://github.com/landru29/favicon#readme"
+}

@@ -1,0 +1,20 @@
+{
+  "name": "favicon",
+  "description": "Dynamic favicon to display progress",
+  "main": "index.js",
+  "authors": [
+    "cyrille.meichel <cmeichel@free.fr>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/landru29/favicon",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "angularjs#^1.5.8"
+  }
+}
