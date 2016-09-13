@@ -12,13 +12,40 @@ Dynamic favicon to display progress
 ```
     angular.module("MyApp", ["favicon"]);
 
-    angular.module('myApp').config(function(faviconProvider) {
-      faviconProvider.color = "blue"
-      faviconProvider.height = 32
-      faviconProvider.width = 32
+    angular.module('MyApp').config(function(faviconProvider) {
+        "use strict";
+        faviconProvider.color = "blue";
+        faviconProvider.height = 32;
+        faviconProvider.width = 32;
+        faviconProvider.autoInject = true;
     });
 
-    angular.module('myApp').controller("MyCtrl", function (favicon) {
+    angular.module('MyApp').controller("MyCtrl", function (favicon) {
+        "use strict";
         favicon.setProgress(0.5);
     });
 ```
+
+Your Html looks like this:
+
+```
+<!DOCTYPE html>
+<html lang="en" data-ng-app="MyApp" >
+  <head>
+    <meta charset="utf-8">
+    <title>Favicon</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="/index.js"></script>
+    <script src="index.js"></script>
+  </head>
+  <body data-ng-controller="MyCtrl">
+    <!-- page content -->
+  </body>
+</html>
+```
+
+If you want to manage your injection, add in your html (``<head>`` section)
+```
+    <link data-favicon-injector rel="icon" type="image/png" href="">
+```
+and specify ``faviconProvider.autoInject = false``
