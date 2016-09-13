@@ -15,11 +15,19 @@ angular.module("favicon").directive("faviconInjector", ["favicon", function (fav
 angular.module("favicon").provider("favicon", function () {
     "use strict";
     var MovingIcon = function MovingIcon(rootScope, options) {
-         this.options = options;
+         this.options = angular.extend(
+             {
+                 color: "green",
+                 height: 32,
+                 width: 32,
+                 autoInject: true
+             },
+             options
+         );
          this.rootScope = rootScope;
          this.canvas = window.document.createElement("canvas");
-         this.canvas.height = this.options.height || 32;
-         this.canvas.width = this.options.width || this.canvas.height;
+         this.canvas.height = this.options.height;
+         this.canvas.width = this.options.width;
          this.context = this.canvas.getContext("2d");
 
          if (this.options.autoInject) {
@@ -40,33 +48,40 @@ angular.module("favicon").provider("favicon", function () {
 
      MovingIcon.prototype.getHref = function () {
          return this.canvas.toDataURL('image/png');
-     }
+     };
 
-     MovingIcon.prototype.injectLink = function () {
-         var links = window.document.head.getElementsByTagName("link");
-         for (var i=0; i<links.length; i++) {
-             if (/icon/.test(links[i].getAttribute("rel"))) {
-                 links[i].setAttribute("href", this.getHref());
+     MovingIcon.prototype.repaint = function () {
+         if (this.options.autoInject) {
+             var links = window.document.head.getElementsByTagName("link");
+             for (var i=0; i<links.length; i++) {
+                 if (/icon/.test(links[i].getAttribute("rel"))) {
+                     links[i].setAttribute("href", this.getHref());
+                 }
              }
          }
-     }
+         this.rootScope.$broadcast("favicon-set-progress");
+     };
+
+     MovingIcon.prototype.clearIcon = function () {
+         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+     };
+
+     MovingIcon.prototype.getContext = function() {
+         return this.context;
+     };
 
      MovingIcon.prototype.setProgress = function (fraction) {
          var centerX = this.canvas.width / 2;
          var centerY = this.canvas.height / 2;
          var radius = Math.min(this.canvas.width / 2, this.canvas.height / 2);
-         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-         this.context.fillStyle = this.options.color || "green";
+         this.clearIcon();
+         this.context.fillStyle = this.options.color;
          this.context.beginPath(); // La part de gateau
          this.context.arc(centerX, centerY, radius, 0, Math.PI * 2 * fraction);
          this.context.lineTo(centerX, centerY);
          this.context.fill();
-         if (this.options.autoInject) {
-             this.injectLink();
-         }
-         this.rootScope.$broadcast("favicon-set-progress");
-     }
-
+         this.repaint();
+     };
 
      this.$get = ["$rootScope", function ($rootScope) {
         return new MovingIcon($rootScope,
