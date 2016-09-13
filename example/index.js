@@ -9,7 +9,24 @@ angular.module('MyApp').config(function(faviconProvider) {
     faviconProvider.autoInject = false;
 });
 
-angular.module('MyApp').controller("MyCtrl", function (favicon) {
+angular.module('MyApp').controller("MyCtrl", function ($interval, favicon) {
     "use strict";
-    favicon.setProgress(0.5);
+    var progress = 0;
+    var dir = 1;
+    var step = 0.05;
+    $interval(
+        function () {
+            progress += dir*step;
+            if (progress > 1) {
+                progress = 1;
+                dir = -1;
+            }
+            if (progress < 0) {
+                progress = 0;
+                dir = 1;
+            }
+            favicon.setProgress(progress);
+        },
+        200
+    );
 });
