@@ -49,14 +49,3 @@ angular.module("favicon").provider("favicon", function () {
     });
   };
 });
-
-angular.module('myApp').config(function(faviconProvider) {
-    faviconProvider.color = "blue"
-  faviconProvider.height = 32
-  faviconProvider.width = 32
-});
-
-angular.module('myApp').controller("MyCtrl", function ($scope, favicon) {
-    $scope.name = 'Superhero';
-    favicon.setProgress(0.5);
-});
