@@ -1,5 +1,5 @@
 {
-  "name": "favicon",
+  "name": "favicon-progress",
   "version": "1.0.0",
   "description": "Dynamic favicon to display progress",
   "main": "index.js",
@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/landru29/favicon/issues"
   },
-  "homepage": "https://github.com/landru29/favicon#readme"
+  "homepage": "https://github.com/landru29/favicon#readme",
+  "devDependencies": {
+    "gulp-clean": "^0.3.2",
+    "gulp-concat": "^2.6.0",
+    "gulp-ng-annotate": "^2.0.0",
+    "gulp-uglify": "^2.0.0"
+  }
 }

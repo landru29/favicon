@@ -49,3 +49,26 @@ If you want to manage your injection, add in your html (``<head>`` section)
     <link data-favicon-injector rel="icon" type="image/png" href="">
 ```
 and specify ``faviconProvider.autoInject = false``
+
+## Developpers
+
+### Prerequisite
+
+You must have a sane instance of [nodejs](https://nodejs.org) and gulp (``sudo npm install -g gulp``)
+
+### Getting the sources
+
+After cloning the repository:
+
+```
+npm install
+bower install
+```
+
+### Building
+
+Just run gulp
+
+```
+gulp
+```

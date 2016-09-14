@@ -1,17 +1,3 @@
-angular.module("favicon", []);
-
-angular.module("favicon").directive("faviconInjector", ["favicon", function (favicon) {
-    return {
-        restrict: "A",
-        link: function(scope, element) {
-            "use strict";
-            scope.$on("favicon-set-progress", function() {
-                element.attr("href", favicon.getHref());
-            })
-        }
-    };
-}])
-
 angular.module("favicon").provider("favicon", function () {
     "use strict";
     var MovingIcon = function MovingIcon(rootScope, options) {
@@ -83,7 +69,7 @@ angular.module("favicon").provider("favicon", function () {
          this.repaint();
      };
 
-     this.$get = ["$rootScope", function ($rootScope) {
+     this.$get = function ($rootScope) {
         return new MovingIcon($rootScope,
             {
                 color: this.color,
@@ -92,5 +78,5 @@ angular.module("favicon").provider("favicon", function () {
                 autoInject: this.autoInject
             }
         );
-    }];
+    };
 });
