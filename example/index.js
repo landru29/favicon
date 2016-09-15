@@ -3,10 +3,17 @@ angular.module("MyApp", ["favicon"]);
 
 angular.module('MyApp').config(function(faviconProvider) {
     "use strict";
-    faviconProvider.color = "blue";
-    faviconProvider.height = 32;
-    faviconProvider.width = 32;
-    faviconProvider.autoInject = false;
+    faviconProvider.setOptions({
+        color: "blue",
+        height: 32,
+        width: 32,
+        autoInject: true,
+        type: "donut",
+        successColor:"green",
+        failureColor:"red",
+        border: false
+    });
+
 });
 
 angular.module('MyApp').controller("MyCtrl", function ($interval, favicon) {
@@ -20,6 +27,7 @@ angular.module('MyApp').controller("MyCtrl", function ($interval, favicon) {
             if (progress > 1) {
                 progress = 1;
                 dir = -1;
+                return;
             }
             if (progress < 0) {
                 progress = 0;

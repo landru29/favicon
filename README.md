@@ -9,20 +9,31 @@ Dynamic favicon to display progress
 
 ## Usage
 
+### Example
+
 ```
     angular.module("MyApp", ["favicon"]);
 
     angular.module('MyApp').config(function(faviconProvider) {
         "use strict";
-        faviconProvider.color = "blue";
-        faviconProvider.height = 32;
-        faviconProvider.width = 32;
-        faviconProvider.autoInject = true;
+        faviconProvider.setOptions({
+            color: "blue",
+            height: 32,
+            width: 32,
+            autoInject: false,
+            type: "donut",
+            successColor:"green",
+            failureColor:"red",
+            border: false
+        });
     });
 
     angular.module('MyApp').controller("MyCtrl", function (favicon) {
         "use strict";
         favicon.setProgress(0.5);
+        favicon.setFailure();
+        favicon.setSuccess();
+        favicon.restore();
     });
 ```
 
@@ -49,6 +60,49 @@ If you want to manage your injection, add in your html (``<head>`` section)
     <link data-favicon-injector rel="icon" type="image/png" href="">
 ```
 and specify ``faviconProvider.autoInject = false``
+
+### Provider options
+| Field        | Type           | Description  |
+|--------------|----------------|--------------|
+|  color       | css color      | Color of the progress. If "rainbow" is specify, the color will be computed with the progress |
+| height       | Integer        | Height of the icon |
+| width        | Integer        | Width of the icon |
+| autoInject   | Boolean        | Let the plugin inject of do it by yourself |
+| type         | String         | Shape (donut / pie) |
+| successColor | css color      | Success background |
+| failureColor | css color      | Failure background |
+| border       | boolean        | Display a border ? |
+
+### Functions
+
+#### restore
+Restore the original favicon
+
+#### setProgress(fraction)
+Display the favicon progress
+
+#### setSuccess()
+Display the success favicon
+
+#### setFailure()
+Display the failure favicon
+
+#### setOptions(options)
+Rewrite options
+
+#### getContext()
+Get the canvas context to design your own icon
+
+#### repaint()
+Repaint your icon. This is used when you want to design your own icon
+
+#### getSize(filter)
+Get some dimensions. If filter is not set, get an object with all dimensions.
+if filter is dimension name, get this dimensions. This is used when you want to design your own icon
+```
+    favicon.getSize();
+    favicon.getSize("centerX");
+```
 
 ## Developpers
 
