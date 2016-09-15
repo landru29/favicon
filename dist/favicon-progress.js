@@ -156,12 +156,14 @@ angular.module("favicon").provider("favicon", function () {
         this.context.fillStyle = this.options.successColor;
         this.context.fill();
 
+        var xBorder = 0.5;
+        var yBorder = 0.35;
         this.context.beginPath();
         this.context.lineWidth = radius / 3;
         this.context.strokeStyle = "#FFFFFF";
-        this.context.moveTo(centerX * 0.5, centerY * 1.1);
-        this.context.lineTo(centerX, centerY * 1.5);
-        this.context.lineTo(centerX * 1.6, centerY * 0.6);
+        this.context.moveTo(centerX * (1 - xBorder), centerY * 0.9);
+        this.context.lineTo(centerX * 0.9, centerY * (1 + yBorder));
+        this.context.lineTo(centerX * (1 + xBorder), centerY * (1 - yBorder));
         this.context.stroke();
         this.repaint();
      };
@@ -176,13 +178,14 @@ angular.module("favicon").provider("favicon", function () {
         this.context.fillStyle = this.options.failureColor;
         this.context.fill();
 
+        var size = 0.4;
         this.context.beginPath();
         this.context.lineWidth = radius / 3;
         this.context.strokeStyle = "#FFFFFF";
-        this.context.moveTo(centerX * 0.5, centerY * 0.5);
-        this.context.lineTo(centerX * 1.5, centerY * 1.5);
-        this.context.moveTo(centerX * 1.5, centerY * 0.5);
-        this.context.lineTo(centerX * 0.5, centerY * 1.5);
+        this.context.moveTo(centerX * (1 - size), centerY * (1 - size));
+        this.context.lineTo(centerX * (1 + size), centerY * (1 + size));
+        this.context.moveTo(centerX * (1 + size), centerY * (1 - size));
+        this.context.lineTo(centerX * (1 - size), centerY * (1 + size));
         this.context.stroke();
         this.repaint();
      };
