@@ -178,7 +178,7 @@ angular.module("favicon").provider("favicon", function () {
         this.context.fillStyle = this.options.failureColor;
         this.context.fill();
 
-        var size = 0.4;
+        var size = 0.45;
         this.context.beginPath();
         this.context.lineWidth = radius / 3;
         this.context.strokeStyle = "#FFFFFF";
