@@ -26,7 +26,7 @@ angular.module("favicon").provider("favicon", function () {
          var links = window.document.head.getElementsByTagName("link");
          for (var i=0; i<links.length; i++) {
              if (/icon/.test(links[i].getAttribute("rel"))) {
-                 this.oldRhef = links[i].getAttribute("href");
+                 this.oldHref = links[i].getAttribute("href");
              }
          }
 
